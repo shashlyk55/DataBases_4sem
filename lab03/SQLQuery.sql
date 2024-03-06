@@ -1,10 +1,10 @@
 CREATE database Slesarev_MyBASE on primary
-( name = N'Slesarev_MyBASE_mdf', filename = N'C:\Vanya\Study\Data_Bases\lab03\Slesarev_MyBASE_mdf.mdf', 
+( name = N'Slesarev_MyBASE_mdf', filename = N'D:\BSTU\SQLProjects\lab03\Slesarev_MyBASE_mdf.mdf', 
    size = 10240Kb, maxsize=128Mb, filegrowth=1024Kb),
-( name = N'Slesarev_MyBASE_ndf', filename = N'C:\Vanya\Study\Data_Bases\lab03\Slesarev_MyBASE_ndf.ndf', 
+( name = N'Slesarev_MyBASE_ndf', filename = N'D:\BSTU\SQLProjects\lab03\Slesarev_MyBASE_ndf.ndf', 
    size = 10240KB, maxsize=64Mb, filegrowth=10%)
 log on
-( name = N'Slesarev_MyBASE_log', filename=N'C:\Vanya\Study\Data_Bases\lab03\Slesarev_MyBASE_log.ldf',       
+( name = N'Slesarev_MyBASE_log', filename=N'D:\BSTU\SQLProjects\lab03\Slesarev_MyBASE_log.ldf',       
    size=10240Kb,  maxsize=512Mb, filegrowth=10%)
 /*filegroup FG1
 ( name = N'Slesarev_MyBASE_fg1_1', filename = N'C:\Vanya\Study\Data_Bases\lab03\Slesarev_MyBASE_fgq-1.ndf', 
@@ -22,7 +22,7 @@ ADD filegroup groupCustomers;
 ALTER DATABASE Slesarev_MyBASE
 ADD FILE (
     NAME = TV,
-    FILENAME = 'C:\Vanya\Study\Data_Bases\lab03\TV.ndf',
+    FILENAME = 'D:\BSTU\SQLProjects\lab03\TV.ndf',
     SIZE = 10MB,
     MAXSIZE = 100MB,
     FILEGROWTH = 1MB
@@ -31,7 +31,7 @@ ADD FILE (
 ALTER DATABASE Slesarev_MyBASE
 ADD FILE (
     NAME = Orders,
-    FILENAME = 'C:\Vanya\Study\Data_Bases\lab03\Orders.ndf',
+    FILENAME = 'D:\BSTU\SQLProjects\lab03\Orders.ndf',
     SIZE = 10MB,
     MAXSIZE = 100MB,
     FILEGROWTH = 1MB
@@ -40,17 +40,13 @@ ADD FILE (
 ALTER DATABASE Slesarev_MyBASE
 ADD FILE (
     NAME = Customers,
-    FILENAME = 'C:\Vanya\Study\Data_Bases\lab03\Customers.ndf',
+    FILENAME = 'D:\BSTU\SQLProjects\lab03\Customers.ndf',
     SIZE = 10MB,
     MAXSIZE = 100MB,
     FILEGROWTH = 1MB
 ) TO FILEGROUP groupCustomers;
 
-/*Учет стоимости рекламы. Заказчики помещают рекламу в телеэфире
-в определенной передаче в определен-ный день. Информационные поля: 
-Название передачи, Рейтинг, Стоимость минуты, Название фирмы-заказчика, 
-Банковские реквизиты, Телефон, Контактное лицо, Вид рекламы, Дата, Длительность в минутах. 
-*/
+
 
 use Slesarev_MyBASE
 CREATE table TVPrograms
@@ -103,8 +99,8 @@ DELETE from Owners
 
 
 INSERT into TVPrograms([program_name], minute_price, rate)
-Values('ОНТ', 25, 7.7),
-('ТНТ', 78, 9.0),
+Values('TNT', 25, 7.7),
+('2x2', 78, 9.0),
 ('nickelodeon', 45, 8.5);
 
 INSERT into Owners(id, surname, [name], thirdname, phone)
@@ -117,9 +113,9 @@ Values('PetrIndustries', 123456, 2),
 ('VasyaIncorporatet', 987766, 0);
 
 INSERT into Orders(order_id,company_customer,[program_name],advertising_type,duration,show_date)
-Values(1,'PetrIndustries','nickelodeon','реклама алкоголя',5,'10-05-2024'),
-(2,'VasyaIncorporatet','ТНТ','реклама казино',3,'12-07-2024'),
-(3,'PetrIndustries','ТНТ','реклама автомобиля',6,'24-06-2024');
+Values(1,'PetrIndustries','nickelodeon','реклама чипсов',5,'10-05-2024'),
+(2,'VasyaIncorporatet','TNT','реклама казино',3,'12-07-2024'),
+(3,'PetrIndustries','TNT','реклама алкоголя',6,'24-06-2024');
 
 use Slesarev_MyBASE
 UPDATE TVPrograms set rate += 0.5 where minute_price > 40
@@ -129,6 +125,5 @@ DELETE from Owners where id = 1
 SELECT * from Owners
 SELECT order_id,[program_name],show_date from Orders WHERE duration < 6
 SELECT count(*) from Orders
-
 
 
